@@ -59,14 +59,8 @@ async function login(req, res) {
             return res.status(400).json({ message: 'Invalid Credentials' });
         }
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
-function verify(req, res) {
-    console.log('Verifying a new request!');
-    return res.status(200).json({ success: true, message: '' });
-}
-
-module.exports = { register, login, verify };
+module.exports = { register, login };

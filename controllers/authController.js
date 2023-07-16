@@ -1,5 +1,5 @@
-function success(req, res) {
+function sendSuccessResponse(req, res) {
     return res.status(200).json({ success: true, user: req.user });
 }
 
-module.exports = { success };
+module.exports = { sendSuccessResponse };

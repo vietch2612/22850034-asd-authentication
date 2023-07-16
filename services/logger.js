@@ -1,22 +1,37 @@
-const logger = require('morgan');
+const morgan = require('morgan');
 const fs = require('fs');
-const { Console } = require('console');
+const path = require('path');
 
 const setupLogger = (app) => {
-    // Tạo định dạng log tùy chỉnh
-    // const customFormat = ':method :url :status :response-time ms - :res[content-length]';
+    const loggerMiddleware = (req, res, next) => {
+        const logData = {
+            method: req.method,
+            url: req.originalUrl,
+            params: req.params,
+            query: req.query,
+            body: req.body,
+        };
 
-    // Tạo writable stream để ghi log vào tệp
-    const logStream = fs.createWriteStream('./logs/console.log', { flags: 'a' });
+        const start = new Date();
 
-    // Tạo một console mới dựa trên writable stream
-    const consoleLogger = new Console({ stdout: logStream, stderr: logStream });
+        res.on('finish', () => {
+            const end = new Date();
+            const responseTime = end - start;
+            logData.response = {
+                status: res.statusCode,
+                responseTime: responseTime + 'ms',
+            };
 
-    // Middleware Morgan với định dạng log tùy chỉnh và writable stream
-    app.use(logger('info', { stream: logStream }));
+            console.log(logData);
+        });
 
-    // Middleware Morgan với định dạng log tùy chỉnh (để in log vào console)
-    app.use(logger('info', { stream: consoleLogger }));
+        next();
+    };
+
+    const accessLogStream = fs.createWriteStream(path.join(__dirname, '../logs/access.log'), { flags: 'a' });
+
+    app.use(loggerMiddleware);
+    app.use(morgan('combined', { stream: accessLogStream }));
 };
 
 exports.setupLogger = setupLogger;
