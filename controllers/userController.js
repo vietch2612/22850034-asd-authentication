@@ -33,7 +33,6 @@ async function register(req, res) {
         user.token = token;
         return res.status(201).json(user);
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
