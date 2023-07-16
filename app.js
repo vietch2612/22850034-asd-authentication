@@ -12,7 +12,6 @@ setupLogger(app);
 app.use(routes);
 
 const port = process.env.PORT;
-
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`22850034-ASD-Authentication MS is running on port ${port}`);
 });
