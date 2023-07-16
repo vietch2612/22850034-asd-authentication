@@ -2,7 +2,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 
-const setupLogger = (app) => {
+const logger = (app) => {
     const loggerMiddleware = (req, res, next) => {
         const logData = {
             method: req.method,
@@ -34,4 +34,4 @@ const setupLogger = (app) => {
     app.use(morgan('combined', { stream: accessLogStream }));
 };
 
-exports.setupLogger = setupLogger;
+exports.logger = logger;

@@ -1,17 +1,12 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
-const { setupLogger } = require('./services/logger');
+const { logger } = require('./services/logger');
+const bodyParser = require('./services/bodyParser');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-setupLogger(app);
+bodyParser(app);
+logger(app);
 
 app.use(routes);
 
-const port = process.env.PORT;
-app.listen(port, () => {
-    console.log(`22850034-ASD-Authentication MS is running on port ${port}`);
-});
+module.exports = app;
