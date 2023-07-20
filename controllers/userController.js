@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models').User;
+const logger = require('../services/logger');
 
 async function register(req, res) {
     try {
@@ -33,6 +34,7 @@ async function register(req, res) {
         user.token = token;
         return res.status(201).json(user);
     } catch (error) {
+        logger.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
@@ -58,6 +60,7 @@ async function login(req, res) {
             return res.status(400).json({ message: 'Invalid Credentials' });
         }
     } catch (error) {
+        logger.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
