@@ -31,7 +31,11 @@ module.exports = (sequelize, DataTypes) => {
     userType: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    token: {
+      type: DataTypes.STRING, // Adjust the data type if needed
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'User',

@@ -47,7 +47,10 @@ async function login(req, res) {
             return res.status(400).json({ message: 'All input is required' });
         }
 
-        const user = await User.findOne({ where: { phoneNumber } });
+        const user = await User.findOne({
+            where: { phoneNumber },
+            attributes: ['id', 'name', 'email', 'phoneNumber', 'userType', 'token', 'password'],
+        });
 
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = jwt.sign({ user_id: user.id, phoneNumber }, process.env.TOKEN_KEY, {
@@ -55,7 +58,15 @@ async function login(req, res) {
             });
 
             user.token = token;
-            return res.status(200).json(user);
+            return res.status(200).json({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                userType: user.userType,
+                token: user.token,
+
+            });
         } else {
             return res.status(400).json({ message: 'Invalid Credentials' });
         }
