@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": null,
-    "database": "22850034-asd-db",
+    "database": "hcmuscab_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
