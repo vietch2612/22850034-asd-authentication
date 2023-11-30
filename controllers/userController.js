@@ -41,16 +41,16 @@ async function register(req, res) {
 
 async function login(req, res) {
     try {
-        const { phone_number, password } = req.body;
+        const { phoneNumber, password } = req.body;
 
-        if (!(phone_number && password)) {
+        if (!(phoneNumber && password)) {
             return res.status(400).json({ message: 'All input is required' });
         }
 
-        const user = await User.findOne({ where: { phone_number } });
+        const user = await User.findOne({ where: { phoneNumber } });
 
         if (user && (await bcrypt.compare(password, user.password))) {
-            const token = jwt.sign({ user_id: user.id, phone_number }, process.env.TOKEN_KEY, {
+            const token = jwt.sign({ user_id: user.id, phoneNumber }, process.env.TOKEN_KEY, {
                 expiresIn: '2h',
             });
 
