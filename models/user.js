@@ -28,6 +28,23 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
+    avatarUrl: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    licensePlateNumber: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true,
+    },
     userType: {
       type: DataTypes.STRING,
       allowNull: false,

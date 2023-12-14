@@ -49,7 +49,7 @@ async function login(req, res) {
 
         const user = await User.findOne({
             where: { phoneNumber },
-            attributes: ['id', 'name', 'email', 'phoneNumber', 'userType', 'token', 'password'],
+            attributes: ['id', 'name', 'email', 'phoneNumber', 'userType', 'token', 'password', 'avatarUrl', 'licensePlateNumber', 'rating'],
         });
 
         if (user && (await bcrypt.compare(password, user.password))) {
@@ -64,6 +64,9 @@ async function login(req, res) {
                 email: user.email,
                 phoneNumber: user.phoneNumber,
                 userType: user.userType,
+                avatarUrl: user.avatarUrl,
+                licensePlateNumber: user.licensePlateNumber,
+                rating: user.rating,
                 token: user.token,
 
             });

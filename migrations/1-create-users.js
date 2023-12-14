@@ -30,6 +30,23 @@ module.exports = {
                 allowNull: true,
                 unique: true,
             },
+            avatarUrl: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            rating: {
+                type: Sequelize.INTEGER,
+                allowNull: true
+            },
+            status: {
+                type: Sequelize.INTEGER,
+                allowNull: true
+            },
+            licensePlateNumber: {
+                type: Sequelize.STRING,
+                allowNull: true,
+                unique: true,
+            },
             createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false,
